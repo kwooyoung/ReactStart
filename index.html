@@ -8,52 +8,34 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     /*babel사용 babel은 코드를 변환해주는데,
-     JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
+      JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
 
-    const Title = () => (
-      <h3 id="title" onMouseEnter={() => console.log("Mouse Enter!")}>
-        i'm H3
-      </h3>
-    );
-    const Button = () => (
-      <button
-        style={{ backgroundColor: "red" }}
-        onClick={() => console.log("Clicked")}
-      >
-        Click me
-      </button>
-    );
-    /*
-     const btn = React.createElement(
-       "button",
-       {
-         onClick: () => console.log("im clicked"),
-         style: {
-           backgroundColor: "tomato",
-         },
-       },
-       "Click me"
-     );
-     */
-    const Container = () => (
-      <div>
-        <Title />
-        <Button />
-      </div>
-    ); // 컴포넌트의 첫글자는 항상 대문자여야 한다. Title,Button
-
-    // const container = React.createElement("div", null, [title, Button]);
-    //div안에 h3와 button을 생성
-    ReactDOM.render(<Container />, root);
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      /*useState는 배열을 주는데 첫번째 요소는 data값, 두번째요소는
+      date를 바꿀때 사용할 modifier*/
+      const up = () => {
+        setCounter(counter + 1);
+      };
+      const down = () => {
+        setCounter(counter - 1);
+      };
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={up}>Up</button>
+          <button onClick={down}>Down</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
 
     /*
-         
+          ReactDOM.render(container, root); // root안에 render(만들다)
 
-         ReactDOM.render(container, root); // root안에 render(만들다)
-
-         React element(contaniner)들을 root(div) 안에서 보여줘라)
-         title, button의 코드는 babel한테 넘겨준 코드, babel은 넘겨준 코드를
-         브라우저가 읽을 수 있는 코드로 바꿔서 head에 담아 놓음.*/
+          React element(contaniner)들을 root(div) 안에서 보여줘라)
+          title, button의 코드는 babel한테 넘겨준 코드, babel은 넘겨준 코드를
+          브라우저가 읽을 수 있는 코드로 바꿔서 head에 담아 놓음.*/
   </script>
 </html>
