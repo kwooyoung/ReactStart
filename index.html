@@ -13,10 +13,16 @@
 
     function App() {
       const [counter, setCounter] = React.useState(0);
+
       /*useState는 배열을 주는데 첫번째 요소는 data값, 두번째요소는
       date를 바꿀때 사용할 modifier*/
       const up = () => {
-        setCounter(counter + 1);
+        //setCounter(counter + 1);
+        setCounter((current) => current + 1);
+        /* 두번째 방법 이게 더 안정적 이방식을 사용했을때, 리엑트가
+        이 current가 확실히 현재값이라는 보장을 받을 수 잇음.
+        setCounter에는 함수를 넣을 수 있음. 첫번째 argument는 현재값
+        그리고 이 함수의 return값이 새로운 state가 됨,*/
       };
       const down = () => {
         setCounter(counter - 1);
