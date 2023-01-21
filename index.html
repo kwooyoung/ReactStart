@@ -12,34 +12,33 @@
     const root = document.getElementById("root");
 
     function App() {
-      const [counter, setCounter] = React.useState(0);
-
-      /*useState는 배열을 주는데 첫번째 요소는 data값, 두번째요소는
-      date를 바꿀때 사용할 modifier*/
-      const up = () => {
-        //setCounter(counter + 1);
-        setCounter((current) => current + 1);
-        /* 두번째 방법 이게 더 안정적 이방식을 사용했을때, 리엑트가
-        이 current가 확실히 현재값이라는 보장을 받을 수 잇음.
-        setCounter에는 함수를 넣을 수 있음. 첫번째 argument는 현재값
-        그리고 이 함수의 return값이 새로운 state가 됨,*/
-      };
-      const down = () => {
-        setCounter(counter - 1);
+      const [Minutes, setMinutes] = React.useState();
+      const onChange = () => {
+        console.log("somebody wrote");
       };
       return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={up}>Up</button>
-          <button onClick={down}>Down</button>
+          <h1 className="Hi">Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={Minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange}
+          />
+          <label htmlFor="hour">Hour</label>
+          <input id="hour" placeholder="Hour" type="number" />
         </div>
       );
     }
     ReactDOM.render(<App />, root);
 
     /*
-          ReactDOM.render(container, root); // root안에 render(만들다)
+     //input 옆에 써주는 글씨 만약 누가 이 글씨를 누르면 그 옆 input이선택됨
+      label을 input에 연결하기 위해 for에 label의 id값 작성.
 
+     ReactDOM.render(container, root); // root안에 render(만들다)
           React element(contaniner)들을 root(div) 안에서 보여줘라)
           title, button의 코드는 babel한테 넘겨준 코드, babel은 넘겨준 코드를
           브라우저가 읽을 수 있는 코드로 바꿔서 head에 담아 놓음.*/
