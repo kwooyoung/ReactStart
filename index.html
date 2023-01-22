@@ -12,26 +12,45 @@
     const root = document.getElementById("root");
 
     function App() {
-      const [Minutes, setMinutes] = React.useState();
-      const onChange = () => {
-        console.log("somebody wrote");
+      const [amount, setAmount] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+
+      const onChange = (event) => {
+        setAmount(event.target.value);
       };
+      const reset = () => setAmount(0);
+      const onFlip = () => setFlipped((current) => !current);
       return (
         <div>
-          <h1 className="Hi">Super Converter</h1>
-          <label htmlFor="minutes">Minutes</label>
-          <input
-            value={Minutes}
-            id="minutes"
-            placeholder="Minutes"
-            type="number"
-            onChange={onChange}
-          />
-          <label htmlFor="hour">Hour</label>
-          <input id="hour" placeholder="Hour" type="number" />
+          <h1>Super Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={flipped ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              disabled={flipped === true}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={flipped ? amount : amount / 60}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              disabled={flipped === false}
+              onChange={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip</button>
         </div>
       );
     }
+
     ReactDOM.render(<App />, root);
 
     /*
