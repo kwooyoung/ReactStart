@@ -9,12 +9,12 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     /*babel사용 babel은 코드를 변환해주는데,
-      JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
+         JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
 
-    function App() {
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(true);
+      const [inverted, setInverted] = React.useState(false);
       const onChange = (event) => {
         setAmount(event.target.value);
       };
@@ -25,44 +25,100 @@
       };
       return (
         <div>
-          <h1>Super Converter</h1>
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={inverted ? amount : amount * 60}
+              value={inverted ? amount * 60 : amount}
               id="minutes"
               placeholder="Minutes"
               type="number"
               onChange={onChange}
-              disabled={!inverted}
+              disabled={inverted}
             />
           </div>
           <div>
             <label htmlFor="hours">Hours</label>
             <input
-              value={inverted ? amount / 60 : amount}
+              value={inverted ? amount : amount / 60}
               id="hours"
               placeholder="Hours"
               type="number"
-              disabled={inverted}
+              disabled={!inverted}
               onChange={onChange}
             />
           </div>
           <button onClick={reset}>Reset</button>
-          <button onClick={invert}>Flip</button>
+          <button onClick={invert}>{inverted ? "Turn back" : "Invert"}</button>
         </div>
       );
     }
+    function KmToMiles() {
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const invert = () => {
+        setInverted((current) => !current);
+      };
 
+      return (
+        <div>
+          <div>
+            <label htmlFor="Km">Km</label>
+            <input
+              value={inverted ? amount / 0.621371 : amount}
+              id="Km"
+              type="number"
+              placeholder="KM"
+              onChange={onChange}
+              disabled={inverted}
+            />
+          </div>
+          <div>
+            <label htmlFor="Km">Miles</label>
+            <input
+              value={inverted ? amount : amount * 0.621371}
+              id="km"
+              type="number"
+              placeholder="Miles"
+              onChange={onChange}
+              disabled={!inverted}
+            />
+          </div>
+          <button>Reset</button>
+          <button>Invert</button>
+        </div>
+      );
+    }
+    function App() {
+      const [index, setIndex] = React.useState("0");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+
+      return (
+        <div>
+          <h1>super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">KM & Miles</option>
+          </select>
+          <hr />
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+      );
+    }
     ReactDOM.render(<App />, root);
 
     /*
-     //input 옆에 써주는 글씨 만약 누가 이 글씨를 누르면 그 옆 input이선택됨
-      label을 input에 연결하기 위해 for에 label의 id값 작성.
+        //input 옆에 써주는 글씨 만약 누가 이 글씨를 누르면 그 옆 input이선택됨
+         label을 input에 연결하기 위해 for에 label의 id값 작성.
 
-     ReactDOM.render(container, root); // root안에 render(만들다)
-          React element(contaniner)들을 root(div) 안에서 보여줘라)
-          title, button의 코드는 babel한테 넘겨준 코드, babel은 넘겨준 코드를
-          브라우저가 읽을 수 있는 코드로 바꿔서 head에 담아 놓음.*/
+        ReactDOM.render(container, root); // root안에 render(만들다)
+             React element(contaniner)들을 root(div) 안에서 보여줘라)
+             title, button의 코드는 babel한테 넘겨준 코드, babel은 넘겨준 코드를
+             브라우저가 읽을 수 있는 코드로 바꿔서 head에 담아 놓음.*/
   </script>
 </html>
