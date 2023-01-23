@@ -2,6 +2,7 @@
 <html>
   <body>
     <div id="root"></div>
+    <div id="root2"></div>
   </body>
   <script src="http://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
@@ -13,15 +14,14 @@
 
     function App() {
       const [amount, setAmount] = React.useState();
-      const [flipped, setFlipped] = React.useState(false);
-
+      const [inverted, setInverted] = React.useState(true);
       const onChange = (event) => {
         setAmount(event.target.value);
       };
       const reset = () => setAmount(0);
-      const onFlip = () => {
+      const invert = () => {
         reset();
-        setFlipped((current) => !current);
+        setInverted((current) => !current);
       };
       return (
         <div>
@@ -29,27 +29,27 @@
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={flipped ? amount * 60 : amount}
+              value={inverted ? amount : amount * 60}
               id="minutes"
               placeholder="Minutes"
               type="number"
               onChange={onChange}
-              disabled={flipped === true}
+              disabled={!inverted}
             />
           </div>
           <div>
             <label htmlFor="hours">Hours</label>
             <input
-              value={flipped ? amount : amount / 60}
+              value={inverted ? amount / 60 : amount}
               id="hours"
               placeholder="Hours"
               type="number"
-              disabled={flipped === false}
+              disabled={inverted}
               onChange={onChange}
             />
           </div>
           <button onClick={reset}>Reset</button>
-          <button onClick={onFlip}>Flip</button>
+          <button onClick={invert}>Flip</button>
         </div>
       );
     }
