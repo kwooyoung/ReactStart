@@ -1,0 +1,56 @@
+h1 {
+  text-align: center;
+  height: 200px;
+  line-height: 200px;
+}
+div {
+  text-align: center;
+}
+
+input {
+  font-size: 20px;
+  height: 40px;
+  margin-left: 30px;
+}
+
+button {
+  height: 20px;
+  width: 100px;
+}
+
+hr {
+  height: 100px;
+}
+
+* {
+  background-color: antiquewhite;
+  margin: 0;
+  padding: 0;
+  color: #6c6c6c;
+}
+.select {
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  border: none;
+  margin-bottom: 100px;
+}
+
+button {
+  margin-top: 30px;
+  height: 40px;
+  width: 200px;
+  border: none;
+}
+#minutes {
+  margin-bottom: 10px;
+}
+#Km {
+  margin-bottom: 10px;
+}
+#Py {
+  margin-bottom: 10px;
+}
+::placeholder {
+  text-align: center;
+}
