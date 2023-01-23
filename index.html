@@ -59,7 +59,11 @@
         setAmount(event.target.value);
       };
       const invert = () => {
+        reset();
         setInverted((current) => !current);
+      };
+      const reset = () => {
+        setAmount(0);
       };
 
       return (
@@ -86,11 +90,12 @@
               disabled={!inverted}
             />
           </div>
-          <button>Reset</button>
-          <button>Invert</button>
+          <button onClick={reset}>Reset</button>
+          <button onClick={invert}>Invert</button>
         </div>
       );
     }
+
     function App() {
       const [index, setIndex] = React.useState("0");
       const onSelect = (event) => {
