@@ -3,7 +3,6 @@
   <body>
     <div id="root"></div>
     <div id="root2"></div>
-    <link rel="stylesheet" href="Converter/main.css" />;
   </body>
   <script src="http://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
@@ -12,156 +11,34 @@
     /*babel사용 babel은 코드를 변환해주는데,
           JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
-
-    function MinutesToHours() {
-      const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(false);
-      const onChange = (event) => {
-        setAmount(event.target.value);
-      };
-      const reset = () => setAmount(0);
-      const invert = () => {
-        reset();
-        setInverted((current) => !current);
-      };
+    function Btn({ text, big }) {
       return (
-        <div>
-          <div>
-            <label htmlFor="minutes">Minutes</label>
-            <input
-              value={inverted ? amount * 60 : amount}
-              id="minutes"
-              placeholder="Minutes"
-              type="number"
-              onChange={onChange}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="hours">Hours</label>
-            <input
-              value={inverted ? amount : amount / 60}
-              id="hours"
-              placeholder="Hours"
-              type="number"
-              disabled={!inverted}
-              onChange={onChange}
-            />
-          </div>
-          <button onClick={reset}>Reset</button>
-          <button onClick={invert}>{inverted ? "Turn back" : "Invert"}</button>
-        </div>
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: big ? 18 : 16,
+          }}
+        >
+          {text}
+        </button>
       );
     }
-    function KmToMiles() {
-      const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(false);
-      const onChange = (event) => {
-        setAmount(event.target.value);
-      };
-      const invert = () => {
-        reset();
-        setInverted((current) => !current);
-      };
-      const reset = () => {
-        setAmount(0);
-      };
-
-      return (
-        <div>
-          <div>
-            <label htmlFor="Km">Km</label>
-            <input
-              value={inverted ? amount / 0.621371 : amount}
-              id="Km"
-              type="number"
-              placeholder="KM"
-              onChange={onChange}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="Miles">Miles</label>
-            <input
-              value={inverted ? amount : amount * 0.621371}
-              id="Miles"
-              type="number"
-              placeholder="Miles"
-              onChange={onChange}
-              disabled={!inverted}
-            />
-          </div>
-          <button onClick={reset}>Reset</button>
-          <button onClick={invert}>{inverted ? "Turn back" : "invert"}</button>
-        </div>
-      );
+    function ConfirmBtn() {
+      return <button>Confirm </button>;
     }
-    function PyeongM2() {
-      const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(false);
-      const onChange = (event) => {
-        setAmount(event.target.value);
-      };
-      const inverte = () => {
-        reset();
-        setInverted((current) => !current);
-      };
-      const reset = () => {
-        setAmount(0);
-      };
-      return (
-        <div>
-          <div>
-            <label htmlFor="py">Pyeong </label>
-            <input
-              value={inverted ? amount / 3.305785 : amount}
-              id="Py"
-              type="number"
-              placeholder="pyeong"
-              onChange={onChange}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="m2">m2 </label>
-            <input
-              value={inverted ? amount : amount * 3.305785}
-              id="m2"
-              type="number"
-              placeholder="m2"
-              onChange={onChange}
-              disabled={!inverted}
-            />
-          </div>
-          <button onClick={reset}>reset</button>
-          <button onClick={inverte}>{inverted ? "Turnback" : "Invert"}</button>
-        </div>
-      );
-    }
-
     function App() {
-      const [index, setIndex] = React.useState("xx");
-      const onSelect = (event) => {
-        setIndex(event.target.value);
-      };
-
       return (
-        <div class="main">
-          <h1>super Converter</h1>
-          <select class="select" value={index} onChange={onSelect}>
-            <option value="xx">==Select your units==</option>
-            <option value="0">Minutes & Hours</option>
-            <option value="1">KM & Miles</option>
-            <option value="2">Pyeong & m2</option>
-          </select>
-          <hr />
-          {index === "xx" ? "Please select your units" : null}
-          {index === "0" ? <MinutesToHours /> : null}
-          {index === "1" ? <KmToMiles /> : null}
-          {index === "2" ? <PyeongM2 /> : null}
+        <div>
+          <Btn text="Save Changes" big={true} />
+          <Btn text="Continue" big={false} />
         </div>
       );
     }
+
     ReactDOM.render(<App />, root);
 
     /*
