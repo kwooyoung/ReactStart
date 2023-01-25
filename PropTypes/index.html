@@ -6,33 +6,38 @@
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     /*babel사용 babel은 코드를 변환해주는데,
           JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
-    function Btn({ text, changeValue }) {
-      console.log(text, "was");
+    function Btn({ text, fontSize = 16 }) {
+      //default value (기본값 설정 가능)
       return (
         <button
-          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
+            fontSize,
           }}
         >
           {text}
         </button>
       );
     }
-
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
     function App() {
       return (
         <div>
-          <Btn text="save Changes" />
+          <Btn text="save Changes" fontSize={18} />
+          <Btn text="continue" />
         </div>
       );
     }
