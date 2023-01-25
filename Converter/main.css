@@ -1,46 +1,36 @@
+label {
+  display: inline-block;
+  width: 80px;
+}
 h1 {
-  text-align: center;
   height: 200px;
-  line-height: 200px;
+  line-height: 258px;
 }
-div {
-  text-align: center;
+.wrap {
+  width: 327px;
+  margin: 0 auto;
 }
-
-input {
-  font-size: 20px;
-  height: 40px;
-  margin-left: 30px;
-}
-
 button {
   height: 20px;
   width: 100px;
 }
-
 hr {
   height: 100px;
+  border-left: none;
 }
-
-* {
-  background-color: antiquewhite;
-  margin: 0;
-  padding: 0;
-  color: #6c6c6c;
+input {
+  font-size: 24px;
+  height: 40px;
 }
-.select {
-  height: 50px;
-  width: 200px;
-  text-align: center;
-  border: none;
-  margin-bottom: 100px;
-}
-
 button {
   margin-top: 30px;
   height: 40px;
   width: 200px;
   border: none;
+}
+* {
+  background-color: antiquewhite;
+  color: #6c6c6c;
 }
 #minutes {
   margin-bottom: 10px;
@@ -53,4 +43,14 @@ button {
 }
 ::placeholder {
   text-align: center;
+}
+div {
+  text-align: center;
+}
+.select {
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  border: none;
+  margin-bottom: 100px;
 }

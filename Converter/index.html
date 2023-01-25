@@ -4,15 +4,14 @@
     <div id="root"></div>
     <div id="root2"></div>
   </body>
+  <link rel="stylesheet" href="./main.css" />
   <script src="http://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    <link rel="stylesheet" href="main.css" />;
     /*babel사용 babel은 코드를 변환해주는데,
           JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
-
     function MinutesToHours() {
       const [amount, setAmount] = React.useState();
       const [inverted, setInverted] = React.useState(false);
@@ -25,7 +24,7 @@
         setInverted((current) => !current);
       };
       return (
-        <div>
+        <div class="wrap">
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
@@ -66,25 +65,24 @@
       const reset = () => {
         setAmount(0);
       };
-
       return (
-        <div>
+        <div class="wrap">
           <div>
             <label htmlFor="Km">Km</label>
             <input
               value={inverted ? amount / 0.621371 : amount}
               id="Km"
               type="number"
-              placeholder="KM"
+              placeholder="Km"
               onChange={onChange}
               disabled={inverted}
             />
           </div>
           <div>
-            <label htmlFor="Km">Miles</label>
+            <label htmlFor="Miles">Miles</label>
             <input
               value={inverted ? amount : amount * 0.621371}
-              id="km"
+              id="Miles"
               type="number"
               placeholder="Miles"
               onChange={onChange}
@@ -110,7 +108,7 @@
         setAmount(0);
       };
       return (
-        <div>
+        <div class="wrap">
           <div>
             <label htmlFor="py">Pyeong </label>
             <input
@@ -140,20 +138,21 @@
     }
 
     function App() {
-      const [index, setIndex] = React.useState("0");
+      const [index, setIndex] = React.useState("xx");
       const onSelect = (event) => {
         setIndex(event.target.value);
       };
-
       return (
-        <div>
+        <div class="main">
           <h1>super Converter</h1>
-          <select value={index} onChange={onSelect}>
+          <select class="select" value={index} onChange={onSelect}>
+            <option value="xx">==Select your units==</option>
             <option value="0">Minutes & Hours</option>
-            <option value="1">KM & Miles</option>
+            <option value="1">Km & Miles</option>
             <option value="2">Pyeong & m2</option>
           </select>
           <hr />
+          {index === "xx" ? "Please select your units" : null}
           {index === "0" ? <MinutesToHours /> : null}
           {index === "1" ? <KmToMiles /> : null}
           {index === "2" ? <PyeongM2 /> : null}
@@ -161,11 +160,9 @@
       );
     }
     ReactDOM.render(<App />, root);
-
     /*
          //input 옆에 써주는 글씨 만약 누가 이 글씨를 누르면 그 옆 input이선택됨
           label을 input에 연결하기 위해 for에 label의 id값 작성.
-
          ReactDOM.render(container, root); // root안에 render(만들다)
               React element(contaniner)들을 root(div) 안에서 보여줘라)
               title, button의 코드는 babel한테 넘겨준 코드, babel은 넘겨준 코드를
