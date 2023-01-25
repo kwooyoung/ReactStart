@@ -12,7 +12,6 @@
           JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
     function Btn({ text, changeValue }) {
-      console.log(text, "was");
       return (
         <button
           onClick={changeValue}
@@ -36,6 +35,10 @@
     기억하게 해줌 (예시 : 버튼이 1000개면 1000개 전부 re-render하면 
     느려지기 때문에 이 방법이 필요함. 또 변하는 프로퍼티에겐 다시 그려달라고
     알려주는거기도 함.)
+    컴포넌트가 React.memo()로 wrapping 될 때, 
+    React는 컴포넌트를 렌더링하고 결과를 메모이징(Memoizing)한다. 그
+    리고 다음 렌더링이 일어날 때 props가 같다면, 
+    React는 메모이징(Memoizing)된 내용을 재사용한다.
     */
     function App() {
       const [value, setValue] = React.useState("Save Changes");
