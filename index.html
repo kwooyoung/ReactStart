@@ -11,30 +11,41 @@
     /*babel사용 babel은 코드를 변환해주는데,
           JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 바꿔줌.*/
     const root = document.getElementById("root");
-    function Btn({ text, big }) {
+    function Btn({ text, changeValue }) {
+      console.log(text, "was");
       return (
         <button
+          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: big ? 18 : 16,
           }}
         >
           {text}
         </button>
       );
     }
-    function ConfirmBtn() {
-      return <button>Confirm </button>;
-    }
+    const MemorizedBtn = React.memo(Btn);
+    /*
+    React.memo() = 부모 객체에서 어떤 변화가 있을때는 전체적으로 
+    re-render가 이뤄지는데, 변경된 props 이외에 프로퍼티들에게 
+    다시 그릴 필요 없다는걸 알려주기 위해 React.memo()를 사용하여
+    기억하게 해줌 (예시 : 버튼이 1000개면 1000개 전부 re-render하면 
+    느려지기 때문에 이 방법이 필요함. 또 변하는 프로퍼티에겐 다시 그려달라고
+    알려주는거기도 함.)
+    */
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => {
+        setValue("Revert Changes");
+      };
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" big={false} />
+          <MemorizedBtn Btn text={value} changeValue={changeValue} />
+          <MemorizedBtn Btn text="Continue" />
         </div>
       );
     }
